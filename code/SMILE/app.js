@@ -17,7 +17,6 @@ var campgroundRoutes= require('./routes/campgrounds');
 var indexRoutes= require('./routes/index');
 var methodOverride= require('method-override');
 
-// mongoose.connect('mongodb+srv://daniazahid:ilikepie786@cluster0-dd10w.mongodb.net/yelpcamp?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
 mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true, useUnifiedTopology: true});
 app.set("view engine","ejs");
