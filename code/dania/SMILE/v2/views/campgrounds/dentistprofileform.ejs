@@ -1,0 +1,231 @@
+<%- include("../partials/header") %>
+
+
+<div class="container" class="smile-logo">
+	<div class="row" >
+	<center><img src="https://i.ibb.co/bs0wwp8/CA537555-0784-49-F8-B855-DD35-C8-CF3-B8-A.png" alt="CA537555-0784-49-F8-B855-		DD35-C8-CF3-B8-A" border="0"  ></center>
+	</div>
+	<div>
+		<h3 style="color:palevioletred;">New Employee Information</h3>
+		<hr style="height:1px;border-width:70%;color:gray;background-color:gray">
+	</div>
+	
+</div>
+
+<div class="container">
+	
+			<form action="/campgrounds/dentistprofileform" method="POST">
+				<div class="form-row">
+	 			 <h4>	  Name : </h4>
+					 <div class="col-md-6">
+						<input type="text" class="form-control" name="firstname" placeholder="First name" required pattern="([A-Z]|[a-z])+" title="Enter a valid First Name e.g John" style="text-transform: capitalize;">
+					 </div>
+
+					 <div class="col-md-6">
+						<input type="text" class="form-control" name="lastname" placeholder="Last name" required pattern="([A-Z]|[a-z])+" title="Enter a valid Last Name e.g Lewis" style="text-transform: capitalize;">
+					  </div>
+
+  				</div>
+
+				<div class="form-row">
+	           		 <div class="col-md-6">
+		    			<label for="address1"><h4>Address :</h4></label>
+						<input type="text" class="form-control" id="address1" name="address1" placeholder="1234 Main st" required>
+      				 </div>
+	   
+   	   				<div class="col-md-6">
+						<label for="address2"><h4>Address 2:</h4></label>
+						<input type="text" class="form-control" name="address2" placeholder="Apartment, studio or floor">
+				   </div>
+ 			    </div>	
+				
+				<div class="form-row">
+					<div class="col-md-6">
+				    	<label for="inputCity"><h4>City</h4></label>
+  		     			<input type="text" class="form-control" id="inputCity" name="city" required>
+					</div>		
+					<div class="col-md-4">
+			 			 <label for="inputState"><h4>State</h4></label>
+						  <select id="inputState" class="form-control" name="state" required>
+							<option selected>Choose...</option>
+							<option value="Pakistan">Pakistan</option>
+						  </select>
+		        	</div>
+					<div class="col-md-2">
+						<label for="inputZip"><h4>Zip</h4></label>
+  		    			<input type="text" class="form-control" id="inputZip" name="zip" required pattern="^[0-9]{5}(?:-[0-9]{4})?$" title="Enter a valid 5 digit zip code">
+    				</div>
+				</div>
+				
+				<div class="form-row">
+					<div class="col-md-6">
+						<label for="email"><h4>Email</h4></label>
+						<input type="email" class="form-control" name="email" id="email" placeholder="myname@example.com"
+							   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email should be like myname@example.com" required>
+						<br>
+					</div>
+					<div class="col-md-3">
+						<label for="male"><h4>Male</h4></label>
+						<input type="radio" class="form-control" id="male" name="gender" value="Male" checked>
+						<br>
+					</div>
+					<div class="col-md-3">
+						<label for="female"><h4>Female</h4></label>
+						<input type="radio" id="female" class="form-control" name="gender" value="Female">
+						<br>			
+					</div>
+				</div>
+
+				<div class="form-row">
+					<h4>Contact :</h4>
+					<div class="col-md-4">
+						<input type="text" class="form-control"  name="home" placeholder="Home Phone">
+					</div>
+					<div class="col-md-4">
+						<input type="text" class="form-control"  name="work" placeholder="Work Phone">
+					</div>
+					<div class="col-md-4">
+						<input type="text" class="form-control"  name="cell" placeholder="Cell Phone" required pattern="[0-9]{11}" title="Mobile number must be 11 digits long">
+						
+			    	</div>
+				</div>
+				<div class="form-row">
+					
+					<div class="col-md-4" style="padding-bottom:25px; padding-top:20px;">
+						<label for="speciality"><h4>Speciality :</h4></label>
+						<select class="form-control" name="speciality" id="speciality">
+						  <option value="General Dentist">General Dentist</option>
+						  <option value="Pedodontist">Pedodontist</option>
+						  <option value="Orthodontist">Orthodontist</option>
+						  <option value="Periodontist">Periodontist</option>
+						  <option value="Endodontist">Endodontist</option>
+						  <option value="Oral Pathologist">Oral Pathologist</option>
+						  <option value="Prosthodontist">Prosthodontist</option>
+						</select>
+					</div>
+					<div class="col-md-4" style="padding-top:20px;">
+						<label for="experience"><h4>Experience :</h4></label>
+						<select class="form-control" name="experience" id="experience">
+						  <option value="2 years">2 years</option>
+						  <option value="5 years">5 years</option>
+						  <option value="10 years">10 years</option>
+						  <option value="15 years or more">15 years or more</option>
+						</select>
+					</div>
+					
+				</div>
+				<div class="form-row">
+					<div class="col-md-12" style="padding-bottom:10px;">
+						<h4>Please select your preferred timings : </h4>
+					</div>
+				</div>
+				<div class="row" width="100%">
+					<div class="col-md-2">
+						<h4 style="text-align: unset;">Monday : </h4>
+					</div>
+					<div class="col-md-3">
+						<select class="form-control" name="monday">
+						  <option value="2:30pm-8:30pm">2:30pm-8:30pm</option>
+						  <option value="7:00am-1:00pm">7:00am-1:00pm</option>
+						  <option value="1:00pm-7:00pm">1:00pm-7:00pm</option>
+						  <option value="Not Available">Not Available</option>
+						</select>
+					</div>
+					</div>
+				
+				<div class="row">
+					<div class="col-md-2">
+						<h4 style="text-align: unset;">Tuesday : </h4>
+					</div>
+					<div class="col-md-3">
+						<select class="form-control" name="tuesday">
+						  <option value="2:30pm-8:30pm">2:30pm-8:30pm</option>
+						  <option value="7:00am-1:00pm">7:00am-1:00pm</option>
+						  <option value="1:00pm-7:00pm">1:00pm-7:00pm</option>
+						  <option value="Not Available">Not Available</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<h4 style="text-align: unset;">Wednesday : </h4>
+					</div>
+					<div class="col-md-3">
+						<select class="form-control" name="wednesday">
+						  <option value="2:30pm-8:30pm">2:30pm-8:30pm</option>
+						  <option value="7:00am-1:00pm">7:00am-1:00pm</option>
+						  <option value="1:00pm-7:00pm">1:00pm-7:00pm</option>
+						  <option value="Not Available">Not Available</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<h4 style="text-align: unset;">Thursday :</h4>
+					</div>
+					<div class="col-md-3">
+						<select class="form-control" name="thursday">
+						  <option value="2:30pm-8:30pm">2:30pm-8:30pm</option>
+						  <option value="7:00am-1:00pm">7:00am-1:00pm</option>
+						  <option value="1:00pm-7:00pm">1:00pm-7:00pm</option>
+						  <option value="Not Available">Not Available</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<h4 style="text-align: unset;">Friday : </h4>
+					</div>
+					<div class="col-md-3">
+						<select class="form-control" name="friday">
+						  <option value="2:30pm-8:30pm">2:30pm-8:30pm</option>
+						  <option value="7:00am-1:00pm">7:00am-1:00pm</option>
+						  <option value="1:00pm-7:00pm">1:00pm-7:00pm</option>
+						  <option value="Not Available">Not Available</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<h4 style="text-align: unset;">Saturday : </h4>
+					</div>
+					<div class="col-md-3" style="padding-bottom:25px;">
+						<select class="form-control" name="saturday">
+						  <option value="2:30pm-8:30pm">2:30pm-8:30pm</option>
+						  <option value="7:00am-1:00pm">7:00am-1:00pm</option>
+						  <option value="1:00pm-7:00pm">1:00pm-7:00pm</option>
+						  <option value="Not Available">Not Available</option>
+						</select>
+					</div>
+				</div>
+			<div class="row">
+				<div class="col-md-4">
+						<label for="consultationfee"><h4>Consultation fee :</h4></label>
+						<select class="form-control" name="consultationfee" id="consultationfee">
+						  <option value="Rs 1500">Rs 1500</option>
+						  <option value="Rs 2500">Rs 2500</option>
+						</select>
+					</div>
+				
+				<div class="col-md-6" style="background-color: #e7f3fe;
+    border-left: 6px solid #2196F3; text-align: center;">
+					
+						<strong>Note: Consultation fee is subject to change based on level of experience. </strong>
+					
+				</div>
+			</div>
+				
+			<div class="form-row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<br>
+							<center><button class="btn btn-lg btn-primary">Submit!</button></center>
+							<br><br>
+						</div>
+					</div>
+				</div>
+				
+	</form>
+</div>
+
+<%- include("../partials/footer") %>

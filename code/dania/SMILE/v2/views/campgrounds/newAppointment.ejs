@@ -1,0 +1,44 @@
+<%- include("../partials/header") %>
+<div class="container">
+	<div class="row">
+		<h1 style="text-align : center;">Make an Appointment</h1>
+		<div style="width: 30% ; margin: 25px auto;">
+			<form action="/campgrounds/appointment" method="POST">
+				<div class="form-group">
+					<input class="form-control" type="text" name="name" placeholder="Full Name" required pattern="([a-zA-Z]+\s)*[a-zA-Z]+$" title="Enter a valid Full Name e.g John Lewis" style="text-transform: capitalize;">	
+				</div>
+				<div class="form-group">
+					<!-- <input class="form-control" type="text" name="date"  >	 -->
+					<input class="form-control" type="date" name="date" placeholder="date" min="<%= minDate %>" required>
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="time" name="time" placeholder="time" min="07:00" max="20:30" required>
+				</div>
+				<div class="form-group">
+					<!-- <input class="form-control" type="" name="dentist" placeholder="dentist"> -->
+					   <!-- <input class="form-control" type="text" name="dentist" list="dentist" placeholder="Dentist">
+						<datalist id="dentist"> -->
+							<select  class="form-control" name="dentist" placeholder="Dentist">
+								<option value="" disabled selected>Dentist</option>
+							 <% foundUsers.forEach(function(foundDentist){ %>
+							<% if(foundDentist.Employee.isEmployee){ %>
+<option value="<%= foundDentist.Employee.employeeid%>"><%=foundDentist.Employee.employeeid+" - "+foundDentist.username %></option>
+							<% } %>
+							<% }); %>
+						</select>
+						</div>
+				<div class="form-group">
+					<input class="form-control" type="text" name="description" placeholder="Reason" required>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-lg btn-primary btn-block">Submit!</button>	
+				</div>
+				
+			</form>
+			<a href="/campgrounds">Back</a>
+		</div>
+		
+	</div>
+	
+</div>
+<%- include("../partials/footer") %>

@@ -1,0 +1,114 @@
+<%- include("../partials/header") %>
+
+
+<div class="container" class="smile-logo">
+	<div class="row" >
+	<center><img src="https://i.ibb.co/bs0wwp8/CA537555-0784-49-F8-B855-DD35-C8-CF3-B8-A.png" alt="CA537555-0784-49-F8-B855-		DD35-C8-CF3-B8-A" border="0"  style="padding-bottom:10px;"></center>
+	</div>
+	<div style="border:0.3px solid gray; text-align: center;">
+		<h3 style="color:palevioletred;">LEAVE APPLICATION FORM</h3>
+		
+	</div>
+	
+</div>
+<div class="container">
+	<form action="/campgrounds/leaveApplication" method="POST">
+		<div class="form-row">
+	 		<h4 style="color:palevioletred; padding-top: 10px;">Employee Name : </h4>
+				<div class="col-md-6">
+					<input type="text" class="form-control" name="firstname" placeholder="First name" pattern="<%=dentistInfo[0].all.firstname%>" title="First Name should match with your real Name" required>
+				</div>
+
+				<div class="col-md-6">
+					<input type="text" class="form-control" name="lastname" placeholder="Last name" pattern="<%=dentistInfo[0].all.lastname%>" title="Last Name should match with your real Name" required>
+				</div>
+  		</div>
+		<div class="form-row">
+	        	<div class="col-md-6">
+		    		<label for="designation"><h4 style="color:palevioletred;">Designation :</h4></label>
+					<input type="text" class="form-control" id="designation" name="designation" placeholder="Job Title" required pattern="[A-Z]+[a-z]+" title="Enter a valid Job Title">
+      			</div>
+	   
+   	   			<div class="col-md-6">
+					<label for="employeeid"><h4 style="color:palevioletred;">Employee ID :</h4></label>
+					<input type="text" class="form-control" id="employeeid" name="employeeid" placeholder="Employee ID" value="<%= foundUser.Employee.employeeid %>" pattern="<%= foundUser.Employee.employeeid %>" title="Employee ID must match the ID assigned to you" required>
+				  </div>
+ 		</div>	
+		<div class="form-row">
+				<div class="col-md-12">
+						<h4 style="color:palevioletred;"><br><br>Type of Leave Requested (Please tick):</h4>	
+				</div>
+		</div>
+		<div class="form-row">
+				<div class="col-md-12">
+						<input type="checkbox" id="Annual" name="LeaveType[]" value="Annual">
+						<label for="Annual"><h4>Annual</h4></label>
+				</div>
+				<div class="col-md-12">
+						<input type="checkbox" id="Medical" name="LeaveType[]" value="Medical">
+						<label for="Medical"><h4>Medical</h4></label>
+				</div>
+				<div class="col-md-12">
+						<input type="checkbox" id="Maternity/Paternity" name="LeaveType[]" value="Maternity/Paternity">
+						<label for="Maternity/Paternity"><h4>Maternity/Paternity</h4></label>
+				</div>
+				<div class="col-md-12">
+						<input type="checkbox" id="Sick" name="LeaveType[]" value="Sick">
+						<label for="Sick"><h4>Sick</h4></label>
+				</div>
+				<div class="col-md-12">
+						<input type="checkbox" id="Unpaid" name="LeaveType[]" value="Unpaid">
+						<label for="Unpaid"><h4>Unpaid</h4></label>
+				</div>
+				<div class="col-md-12">
+						<input type="checkbox" id="Casual" name="LeaveType[]" value="Casual">
+						<label for="Casual"><h4>Casual</h4></label>
+				</div>
+				<div class="col-md-12">
+						<input type="checkbox" id="Other" name="LeaveType[]" value="Other">
+						<label for="Other"><h4>Other</h4></label>
+				</div>
+		</div>
+		<div class="form-row">
+				<div class="col-md-4">
+		    		<label for="fromDate"><h4 style="color:palevioletred;">From :</h4></label>
+					<input type="date" class="form-control" id="fromDate" name="fromDate" min="<%= minDate %>" required>
+      			</div>
+				<div class="col-md-4">
+		    		<label for="toDate"><h4 style="color:palevioletred;">To :</h4></label>
+					<input type="date" class="form-control" id="toDate" name="toDate" min="<%= minDate %>" required>
+      			</div>
+				<div class="col-md-4">
+		    		<label for="LeaveNo"><h4 style="color:palevioletred;">No. of Leave(s) :</h4></label>
+					<input type="number" class="form-control" id="LeaveNo" name="LeaveNo" min="1" required>
+      			</div>
+				
+		</div>
+		<div class="form-row">
+				<div class="col-md-12">
+					<h4 style="color:palevioletred;"><br><br>Reason : (Describe your cause of leave)</h4>	
+				</div>
+		</div>
+		<div class="form-row">
+				<div class="col-md-8">
+					<textarea class="form-control rounded-0" name="reason"  rows="5" required></textarea>
+				</div>
+		</div>
+		<div class="form-row">
+				<div class="col-md-4">
+					<label for="todayDate"><h4 style="color:palevioletred;">Date :</h4></label>
+					<input type="date" class="form-control" id="todayDate" name="todayDate" value="<%= minDate %>" required>
+				</div>
+		</div>
+		<div class="form-row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<br><br>
+							<center><button class="btn btn-default" style="background-color: gainsboro;width:15%;padding-top: 10px;padding-bottom: 10px;border-color: darkgray;"><span style="color:grey;font-size:initial;font-weight: bold;"><i class="far fa-envelope"></i> Submit</span></button></center>
+							<br><br>
+						</div>
+					</div>
+		</div>
+	</form>
+</div>
+<%- include("../partials/footer") %>

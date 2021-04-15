@@ -1,0 +1,41 @@
+<%- include("../partials/header") %>
+<div class="container">
+	<div class="row">
+		<h1 style="text-align : center;">Edit Appointment</h1>
+		<div style="width: 30% ; margin: 25px auto;">
+			<form action="/campgrounds/appointments/<%=appointment._id%>?_method=PUT" method="POST">
+				<div class="form-group">
+			<input class="form-control" type="text" name="appointment[name]" placeholder="Full Name" value="<%=appointment.name%>" required pattern="([a-zA-Z]+\s)*[a-zA-Z]+$" title="Enter a valid Full Name e.g John Lewis" style="text-transform: capitalize;">	
+				</div>
+				<div class="form-group">
+			
+			<input class="form-control" type="date" name="appointment[date]" placeholder="date" value="<%=appointment.date%>" required>
+				</div>
+				<div class="form-group">
+			<input class="form-control" type="time" name="appointment[time]" placeholder="time" value="<%=appointment.time%>" min="07:00" max="20:30" required>
+				</div>
+				<div class="form-group">
+							<select  class="form-control" name="appointment[dentist]" placeholder="Dentist">
+								<option value="" disabled selected>Dentist</option>
+						
+							 <% foundUsers.forEach(function(foundDentist){ %>
+							<% if(foundDentist.Employee.isEmployee){ %>
+<option value="<%= foundDentist.Employee.employeeid%>"><%=foundDentist.Employee.employeeid+" - "+foundDentist.username %></option>
+							<% } %>
+							<% }); %>
+						</select>
+						</div>
+				<div class="form-group">
+		<input class="form-control" type="text" name="appointment[description]" placeholder="Reason" value="<%=appointment.description%>" required>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-lg btn-primary btn-block">Submit!</button>	
+				</div>
+				
+			</form>
+			<a href="/campgrounds/appointments">Back</a>
+		</div>
+		
+	</div>	
+</div>
+<%- include("../partials/footer") %>

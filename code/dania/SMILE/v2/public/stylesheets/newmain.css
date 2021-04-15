@@ -1,0 +1,97 @@
+.thumbnail img {
+	width: 90%;
+	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+}
+
+h2.PatientTitle{
+	padding-top: 7%;
+	padding-bottom: 5%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: xx-large;
+    color: firebrick;
+	
+	
+    
+}
+.container .PatientTitle{
+	margin: 0 auto;
+}
+span.captionName{
+	padding-right:25%;
+	padding-left:25%;
+	padding-top:25%;
+	padding-bottom:25%;
+	
+font-family: 'Montserrat', sans-serif;
+	font-size: larger;
+	color: royalblue;
+	
+}
+p.captionName{
+	padding-right:25%;
+	padding-left:25%;
+}
+div.autoShowHide {
+ font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 590;
+	padding-top:5%;
+	padding-bottom:5%;
+    text-align: center;
+    text-transform: none;
+    text-decoration-color: gray;
+    padding-bottom: 9px;
+}
+
+i{
+	display: inline;
+}
+#delete-form {
+	display : inline;
+}
+.delete-form {
+	display : inline;
+}
+.thumbnail {
+	padding: 0;
+	border: white;
+	
+}
+
+.thumbnail .caption-full{
+	padding: 9px;
+}
+#tablehead{
+ background-color: #6c7ae0;
+ color: #fff;
+ 
+}
+p.Patient-Text1{
+	font-family: 'Montserrat', sans-serif;	
+	text-align: center;
+	padding-top: 5%;
+}
+p.Patient-Text2{
+	font-family: 'Montserrat', sans-serif;
+
+	text-align: center;
+}
+
+img.Patient-Avatar {
+  border-radius: 50%;
+  
+}
+tr{
+	
+	border-bottom: 1px solid #cccccc; 
+	
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f8f6ff;
+}
+
+img.smile-logo {
+	display:table-cell; vertical-align:middle; text-align:center;
+} 

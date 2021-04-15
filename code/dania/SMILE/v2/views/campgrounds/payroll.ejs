@@ -1,0 +1,82 @@
+<%- include("../partials/header") %>
+
+<head>
+				<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/stylesheets/payroll.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-			lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+</head>
+
+<div class="container">
+	<div class="form-row">
+		<div class="col-md-12">
+			<h1>
+				<center>Payroll Summary</center>
+			</h1>
+		</div>
+			
+		<div class="col-md-6">
+			
+			<center><img src="https://image.flaticon.com/icons/svg/451/451249.svg">			
+			<h4>
+			Employee Name: <span><%=dentistInfo[0].all.firstname+" "+dentistInfo[0].all.lastname%></span>
+			</h4>
+			</center>
+			
+		</div>
+		<div class="col-md-6">
+			<center><img src="https://www.flaticon.com/premium-icon/icons/svg/1046/1046523.svg">
+			<h4>
+				Employee ID: <span><%=dentistInfo[0].author.employeeid%></span>
+			</h4>
+			</center>
+			
+		</div>
+		
+		<div class="col-md-6">
+			<center>
+			<img src="https://image.flaticon.com/icons/svg/1785/1785853.svg" >
+			<h4>
+				No. of Patients Checked/month: <span><%=dentistInfo[0].patientNoChecked%></span>
+			</h4>
+			</center>
+			
+		</div>
+		<div class="col-md-6">
+			<center>	<img src="https://image.flaticon.com/icons/svg/2534/2534714.svg"><h4>
+				Number of days worked: <span><%=foundUser.Employee.Markattendance.length %></span> 
+			</h4></center>
+			
+			
+		</div>
+		<div class="col-md-6">
+		
+			<center>
+			<img src="https://www.flaticon.com/premium-icon/icons/svg/2901/2901678.svg">
+				<h4>
+				
+			Base pay : <span><%=dentistInfo[0].basepay%></span>
+				</h4>
+				
+			</center>
+		</div>
+		<div class="col-md-6">
+			<center>
+			<img src="https://image.flaticon.com/icons/svg/1039/1039328.svg">
+			<h4>
+				Consultation Fee: <span><%=dentistInfo[0].all.consultationfee%></span>
+			</h4> 
+			</center>
+		</div>
+		<div class="col-md-12">
+			<img src="https://image.flaticon.com/icons/svg/1420/1420341.svg">
+			
+			<h4>
+				Total Current Salary: <span>Rs <%=" " + amount %></span> 
+			</h4>
+		</div>
+	</div>
+</div>
+
+

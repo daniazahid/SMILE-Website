@@ -1,0 +1,68 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+  <h2>Appointments</h2>
+
+  <div class="table-responsive">          
+  <table class="table">
+    <thead id="tablehead">
+      <tr>
+		 <th>Patient ID</th>
+        <th>Patient Name</th>
+        <th>Date(YYYY/MM/DD)</th>
+        <th>Time</th>
+		 <% if(currentUser && currentUser.isAdmin){ %>
+		  <th>Dentist ID</th>
+		  <th>Status</th>
+		  <% } %>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+		 <% appointments.forEach(function(appointment){ %>
+		<tr>
+		<td><%=appointment.patientid %> </td>
+        <td><%=appointment.name %> </td>
+        <td><%=appointment.date %></td>
+        <td><%=appointment.time %></td>
+	<%	if(currentUser && currentUser.isAdmin){ %>
+			<td><%=appointment.dentist %></td>
+			<td>
+			<% if(appointment.checked){ %>
+				Checked	
+			<%	}else{ %> 
+				Pending
+			<%	} %>
+			</td>
+		<%	} %>
+        <td>
+			<% if (currentUser && currentUser.isAdmin){ %>
+			<a class="btn btn-xs btn-warning" href="/campgrounds/appointments/<%=appointment._id%>/appointmentEdit">
+					Update
+			</a>
+			<form id="delete-form" action="/campgrounds/appointments/<%=appointment._id%>?_method=DELETE" method="POST">
+					<button class="btn btn-xs btn-danger">
+					Delete
+					</button>		
+			</form>	
+			
+			<% }else{ %>
+			<% if(appointment.checked){ %>
+			   Checked
+			<% }else{ %>
+				 <form  action="/campgrounds/appointments/<%=appointment._id%>" method="POST">
+    <input class="form-check-input" id="patientChecked" name="checked" type="checkbox" value=true onChange="this.form.submit()">
+  					<label for="patientChecked">Checked</label><br>
+			</form>	
+		<%	} %>
+			
+			<% } %>
+		</td>
+
+        </tr>
+		 <% }); %>
+    </tbody>
+  </table>
+  </div>
+</div> 
+<%- include("../partials/footer") %>

@@ -1,0 +1,1008 @@
+<%- include("../partials/header") %>
+
+
+<div class="container" class="smile-logo">
+	<div class="row" >
+	<center><img src="https://i.ibb.co/bs0wwp8/CA537555-0784-49-F8-B855-DD35-C8-CF3-B8-A.png" alt="CA537555-0784-49-F8-B855-		DD35-C8-CF3-B8-A" border="0"  ></center>
+	</div>
+	<div>
+		<h3 style="color:palevioletred;">Update Patient Information</h3>
+		<hr style="height:1px;border-width:70%;color:gray;background-color:gray">
+	</div>
+</div>
+
+<div class="container">
+	
+			<form action="/campgrounds/medicalprofileform/<%= patient[0]._id %>?_method=PUT" method="POST">
+				<div class="form-row">
+	 			 <h4>	  Name : </h4>
+					 <div class="col-md-6">
+	<input type="text" class="form-control" name="firstname" placeholder="First name" value="<%= patient[0].all.firstname%>" required pattern="([A-Z]|[a-z])+" title="Enter a valid First Name e.g John" style="text-transform: capitalize;">
+					 </div>
+
+					 <div class="col-md-6">
+			<input type="text" class="form-control" name="lastname" placeholder="Last name" value="<%= patient[0].all.lastname%>" required pattern="([A-Z]|[a-z])+" title="Enter a valid Last Name e.g Lewis" style="text-transform: capitalize;">
+					  </div>
+
+  				</div>
+
+				<div class="form-row">
+	           		 <div class="col-md-6">
+		    			<label for="address1"><h4>Address :</h4></label>
+<input type="text" class="form-control" id="address1" name="address1" placeholder="1234 Main st" value="<%=patient[0].all.address1%>" required>
+      				 </div>
+	   
+   	   				<div class="col-md-6">
+						<label for="address2"><h4>Address 2:</h4></label>
+		<input type="text" class="form-control" name="address2" placeholder="Apartment, studio or floor" value="<%= patient[0].all.address2%>">
+				   </div>
+ 			    </div>	
+				
+				<div class="form-row">
+					<div class="col-md-6">
+				    	<label for="inputCity"><h4>City</h4></label>
+  		    <input type="text" class="form-control" id="inputCity" name="city" value="<%= patient[0].all.city%>" required>
+					</div>		
+					<div class="col-md-4">
+			 			 <label for="inputState"><h4>State</h4></label>
+					<select id="inputState" class="form-control" name="state" value="<%= patient[0].all.state%>" required>
+							<option selected>Choose...</option>
+							<option>...</option>
+						  </select>
+		        	</div>
+					<div class="col-md-2">
+						<label for="inputZip"><h4>Zip</h4></label>
+  		    	<input type="text" class="form-control" id="inputZip" name="zip" value="<%= patient[0].all.zip%>" pattern="^[0-9]{5}(?:-[0-9]{4})?$" title="Enter a valid 5 digit zip code" required>
+    				</div>
+				</div>
+				
+				<div class="form-row">
+					<div class="col-md-6">
+						<label for="email"><h4>Email</h4></label>
+			<input type="email" class="form-control" name="email" id="email" placeholder="myname@example.com" value="<%= patient[0].all.email%>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email should be like myname@example.com">
+						<br>
+					</div>
+					<%if(patient[0].all.gender=="Male"){ %>
+					<div class="col-md-3">
+						<label for="male"><h4>Male</h4></label>
+						<input type="radio" class="form-control" id="male" name="gender" value="Male" checked>
+						<br>
+					</div>
+					<div class="col-md-3">
+						<label for="female"><h4>Female</h4></label>
+						<input type="radio" id="female" class="form-control" name="gender" value="Female">
+						<br>			
+					</div>	
+					<% }else{ %>
+					<div class="col-md-3">
+						<label for="male"><h4>Male</h4></label>
+						<input type="radio" class="form-control" id="male" name="gender" value="Male">
+						<br>
+					</div>
+					<div class="col-md-3">
+						<label for="female"><h4>Female</h4></label>
+						<input type="radio" id="female" class="form-control" name="gender" value="Female" checked>
+						<br>			
+					</div>	
+					<% } %>
+					
+				</div>
+
+				<div class="form-row">
+					<h4>Contact :</h4>
+					<div class="col-md-4">
+				<input type="text" class="form-control"  name="home" placeholder="Home Phone" value="<%= patient[0].all.home%>">
+					</div>
+					<div class="col-md-4">
+			<input type="text" class="form-control"  name="work" placeholder="Work Phone" value="<%= patient[0].all.work%>">
+					</div>
+					<div class="col-md-4">
+						<input type="text" class="form-control"  name="cell" placeholder="Cell Phone" value="<%= patient[0].all.cell%>" required pattern="[0-9]{11}" title="Mobile number must be 11 digits long">
+			    	</div>
+				</div>
+
+				<div class="form-row">
+					<br><br>
+					<h3 style="color:palevioletred;">Medical History</h3>
+					<hr style="height:1px;border-width:70%;color:gray;background-color:gray">
+				</div>
+				
+				<div class="form-row" >
+					<div class="col-md-4">
+						<h4>Do you have a physician?</h4>
+					</div>
+					<div class="col-md-6">
+						<br>
+						<label for="physicianName"><h4>Physician's Name:</h4></label>
+				<input type="text" class="form-control"  name="physicianName" id="physicianName" value="<%= patient[0].all.physicianName%>" pattern="([A-Z]|[a-z])+" title="Enter a valid Name e.g John" style="text-transform: capitalize;">
+						
+						<label for="physicianPhone"><h4>Physician's Phone:</h4></label>
+				<input type="text" class="form-control"  name="physicianPhone" id="physicianPhone" value="<%= patient[0].all.physicianPhone%>" pattern="[0-9]({11}|{10})" title="Phone number must have correct number of digits">
+			
+						<label for="lastvisit"><h4>Date of Last Visit/Exam:</h4></label>
+			<input type="date" class="form-control"  name="physicianLastvisit" id="lastvisit" value="<%= patient[0].all.physicianLastvisit%>">
+					</div>
+					<br>
+				</div>
+				
+				<div class="form-row">
+					<div class="col-md-4">
+						<h4>How would you rate your health?</h4>
+					</div>
+					<% if(patient[0].all.health=="Good"){ %>
+						<div class="col-md-3">
+						<center><label for="good"><h4>Good</h4></label></center>
+						<input type="radio" class="form-control" id="good" name="health" value="Good" checked>
+					</div>
+					<div class="col-md-3">
+						<center><label for="fair"><h4>Fair</h4></label></center>
+						<input type="radio" class="form-control" id="fair" name="health" value="Fair">
+					</div>
+					<div class="col-md-2"> 
+						<center><label for="poor"><h4>Poor</h4></label></center>
+						<input type="radio" class="form-control" id="poor" name="health" value="Poor">
+					</div>
+				<%	}if(patient[0].all.health=="Fair"){ %>
+					<div class="col-md-3">
+						<center><label for="good"><h4>Good</h4></label></center>
+						<input type="radio" class="form-control" id="good" name="health" value="Good">
+					</div>
+					<div class="col-md-3">
+						<center><label for="fair"><h4>Fair</h4></label></center>
+						<input type="radio" class="form-control" id="fair" name="health" value="Fair" checked>
+					</div>
+					<div class="col-md-2"> 
+						<center><label for="poor"><h4>Poor</h4></label></center>
+						<input type="radio" class="form-control" id="poor" name="health" value="Poor">
+					</div>	
+				<%	} if(patient[0].all.health=="Poor"){ %>
+					<div class="col-md-3">
+						<center><label for="good"><h4>Good</h4></label></center>
+						<input type="radio" class="form-control" id="good" name="health" value="Good">
+					</div>
+					<div class="col-md-3">
+						<center><label for="fair"><h4>Fair</h4></label></center>
+						<input type="radio" class="form-control" id="fair" name="health" value="Fair">
+					</div>
+					<div class="col-md-2"> 
+						<center><label for="poor"><h4>Poor</h4></label></center>
+						<input type="radio" class="form-control" id="poor" name="health" value="Poor" checked>
+					</div>
+					<% } %>
+					
+				</div>
+				<div class="form-row">
+					<div class="col-md-5">
+						<br>
+						<h4>Do you take any medications?</h4>		
+					</div>
+					<% if(patient[0].all.Havemedication=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="healthyes"><h4><br>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="healthyes" name="Havemedication" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="healthno"><h4><br>No</h4></label></center>
+						<input type="radio" class="form-control" id="healthno" name="Havemedication" value="No">
+					</div>	 
+						<% }else{ %>
+					<div class="col-md-1">
+						<center><label for="healthyes"><h4><br>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="healthyes" name="Havemedication" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="healthno"><h4><br>No</h4></label></center>
+						<input type="radio" class="form-control" id="healthno" name="Havemedication" value="No" checked>
+					</div>
+						<% } %>
+					
+					<div class="col-md-5">
+						<br>
+		<textarea class="form-control rounded-0" name="medication"  placeholder="If yes, please list:" rows="4" value="<%= patient[0].all.medication%>">						   </textarea>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="col-md-5">
+						<br>
+						<h4>Have you ever had surgery or been hospitalized?</h4>
+					</div>
+					<% if(patient[0].all.HaveHospitalized=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="hospitalizedyes"><h4><br>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="hospitalizedyes" name="HaveHospitalized" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="hospitalizedno"><h4><br>No</h4></label></center>
+					<input type="radio" class="form-control" id="hospitalizedno" name="HaveHospitalized" value="No">
+					</div>
+				<%	}else { %>
+					<div class="col-md-1">
+						<center><label for="hospitalizedyes"><h4><br>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="hospitalizedyes" name="HaveHospitalized" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="hospitalizedno"><h4><br>No</h4></label></center>
+					<input type="radio" class="form-control" id="hospitalizedno" name="HaveHospitalized" value="No" checked>
+					</div>
+					<% } %>
+					<div class="col-md-5">
+						<br>
+	<textarea class="form-control rounded-0" name="hopitalized"  placeholder="If yes, please describe:" rows="4" value="<%= patient[0].all.hopitalized%>">						</textarea>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="col-md-5">
+						<br>
+						<h4>Do you use any form of tobacco?</h4>
+					</div>
+					<% if(patient[0].all.UseTobacco=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="tobaccoyes"><h4><br>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="tobaccoyes" name="UseTobacco" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="tobaccono"><h4><br>No</h4></label></center>
+						<input type="radio" class="form-control" id="tobacconono" name="UseTobacco" value="No">
+					</div>
+					<% }else{ %>
+					<div class="col-md-1">
+						<center><label for="tobaccoyes"><h4><br>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="tobaccoyes" name="UseTobacco" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="tobaccono"><h4><br>No</h4></label></center>
+						<input type="radio" class="form-control" id="tobacconono" name="UseTobacco" value="No" checked>
+					</div>
+					<% } %>
+					
+					<div class="col-md-5">
+						<br>
+		<textarea class="form-control rounded-0" name="tobacco"  placeholder="If yes, please describe:" rows="4" value="<%=patient[0].all.tobacco%>">						</textarea>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="col-md-5">
+						<br>
+						<h4>Do you have any allergies? (medications, food, materials, etc.)</h4>
+					</div>
+					<% if(patient[0].all.HaveAllergies=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="allergiesyes"><h4><br>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="allergiesyes" name="HaveAllergies" checked value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="allergiesno"><h4><br>No</h4></label></center>
+						<input type="radio" class="form-control" id="allergiesno" name="HaveAllergies" value="No">
+					</div>
+					<% }else{ %>
+					<div class="col-md-1">
+						<center><label for="allergiesyes"><h4><br>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="allergiesyes" name="HaveAllergies" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="allergiesno"><h4><br>No</h4></label></center>
+						<input type="radio" class="form-control" id="allergiesno" name="HaveAllergies" checked value="No">
+					</div>
+					<% } %>
+					
+					<div class="col-md-5">
+						<br>
+		  	<textarea class="form-control rounded-0" name="allergies"  placeholder="If yes, please describe:" rows="4" value="<%=patient[0].all.allergies%>">						  </textarea>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="col-md-12">
+						<h4><br><br>Select any of the following conditions you might have/have had</h4>	
+					</div>
+				</div>
+
+				<div class="form-row">
+					<% if(patient[0].all.conditions.includes("Abnormal Bleeding")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="abnormal-bleeding" name="conditions[]" value="Abnormal Bleeding" checked>
+						<label><h4>Abnormal Bleeding</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="abnormal-bleeding" name="conditions[]" value="Abnormal Bleeding">
+						<label><h4>Abnormal Bleeding</h4></label>
+					</div>
+					<% } %>
+					<% if(patient[0].all.conditions.includes("Hemophilia")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Hemophilia" name="conditions[]" value="Hemophilia" checked>
+						<label><h4>Hemophilia</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Hemophilia" name="conditions[]" value="Hemophilia">
+						<label><h4>Hemophilia</h4></label>
+					</div>
+					<% }%>
+					<% if(patient[0].all.conditions.includes("Anemia")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Anemia" name="conditions[]" value="Anemia" checked>
+						<label><h4>Anemia</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Anemia" name="conditions[]" value="Anemia">
+						<label><h4>Anemia</h4></label>
+					</div>
+					<% } %>
+					<% if(patient[0].all.conditions.includes("Asthma")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Asthma" name="conditions[]" value="Asthma" checked>
+						<label><h4>Asthma</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Asthma" name="conditions[]" value="Asthma">
+						<label><h4>Asthma</h4></label>
+					</div>
+					<% } %>
+					<% if(patient[0].all.conditions.includes("Cancer")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Cancer" name="conditions[]" value="Cancer" checked>
+						<label><h4>Cancer</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Cancer" name="conditions[]" value="Cancer">
+						<label><h4>Cancer</h4></label>
+					</div>
+					<% } %>
+					<% if(patient[0].all.conditions.includes("Ulcers")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Ulcers" name="conditions[]" value="Ulcers" checked>
+						<label><h4>Ulcers</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Ulcers" name="conditions[]" value="Ulcers">
+						<label><h4>Ulcers</h4></label>
+					</div>
+					<% } %>
+					
+					<% if(patient[0].all.conditions.includes("HIV/AIDS")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="HIV/AIDS" name="conditions[]" value="HIV/AIDS" checked>
+						<label><h4>HIV/AIDS</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="HIV/AIDS" name="conditions[]" value="HIV/AIDS">
+						<label><h4>HIV/AIDS</h4></label>
+					</div>
+					<% } %>
+					<% if(patient[0].all.conditions.includes("Sinus")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Sinus" name="conditions[]" value="Sinus" checked>
+						<label><h4>Sinus Problems</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Sinus" name="conditions[]" value="Sinus">
+						<label><h4>Sinus Problems</h4></label>
+					</div>
+					<% } %>
+					<% if(patient[0].all.conditions.includes("Diabetes")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Diabetes" name="conditions[]" value="Diabetes" checked>
+						<label><h4>Diabetes</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Diabetes" name="conditions[]" value="Diabetes">
+						<label><h4>Diabetes</h4></label>
+					</div>
+					<% } %>
+					<% if(patient[0].all.conditions.includes("Epilepsy")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Epilepsy" name="conditions[]" value="Epilepsy" checked>
+						<label><h4>Epilepsy</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Epilepsy" name="conditions[]" value="Epilepsy">
+						<label><h4>Epilepsy</h4></label>
+					</div>
+					<% } %>
+					<% if(patient[0].all.conditions.includes("Shingles")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Shingles" name="conditions[]" value="Shingles" checked>
+						<label><h4>Shingles</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Shingles" name="conditions[]" value="Shingles">
+						<label><h4>Shingles</h4></label>
+					</div>
+					<% } %>
+					<% if(patient[0].all.conditions.includes("Tuberculosis")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Tuberculosis" name="conditions[]" value="Tuberculosis" checked>
+						<label><h4>Tuberculosis</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Tuberculosis" name="conditions[]" value="Tuberculosis">
+						<label><h4>Tuberculosis</h4></label>
+					</div>
+					<% } %>
+					<% if(patient[0].all.conditions.includes("Stroke")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Stroke" name="conditions[]" value="Stroke" checked>
+						<label><h4>Stroke</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Stroke" name="conditions[]" value="Stroke">
+						<label><h4>Stroke</h4></label>
+					</div>
+					<% } %>
+					<% if(patient[0].all.conditions.includes("Seizures")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Seizures" name="conditions[]" value="Seizures" checked>
+						<label><h4>Seizures</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="Seizures" name="conditions[]" value="Seizures">
+						<label><h4>Seizures</h4></label>
+					</div>
+					<% } %>
+					<% if(patient[0].all.conditions.includes("Kidney Disease")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="kidney-disease" name="conditions[]" value="Kidney Disease" checked>
+						<label><h4>Kidney Disease</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="kidney-disease" name="conditions[]" value="Kidney Disease">
+						<label><h4>Kidney Disease</h4></label>
+					</div>
+					<% } %>
+					<% if(patient[0].all.conditions.includes("Liver Disease")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="liver-disease" name="conditions[]" value="Liver Disease" checked>
+						<label><h4>Liver Disease</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" id="liver-disease" name="conditions[]" value="Liver Disease">
+						<label><h4>Liver Disease</h4></label>
+					</div>
+					<% } %>
+					
+				</div>
+
+				<div class="form-row">
+					<div class="col-md-12">
+						<h4><br><br>If Female, please answer the following:</h4>
+					</div>
+					<div class="col-md-6">
+						<h4><br>Are you taking birth control pills?</h4>
+					</div>
+					<% if(patient[0].all.Havebirthcontrol=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="control-pills-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="control-pills-yes" name="Havebirthcontrol" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="control-pills-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="control-pills-no" name="Havebirthcontrol" value="No">
+					</div>
+					<% }else{ %>
+					<div class="col-md-1">
+						<center><label for="control-pills-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="control-pills-yes" name="Havebirthcontrol" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="control-pills-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="control-pills-no" name="Havebirthcontrol" value="No" checked>
+					</div>
+					<% } %>
+					
+					<div class="col-md-4">
+						<br><br><br><br>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-6">
+						<h4><br>Are you pregnant?</h4>
+					</div>
+					<% if(patient[0].all.Arepregnant=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="pregnant-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="pregnant-yes" name="Arepregnant" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="pregnant-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="pregnant-no" name="Arepregnant" value="No">
+					</div>
+					<% }else{ %>
+					<div class="col-md-1">
+						<center><label for="pregnant-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="pregnant-yes" name="Arepregnant" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="pregnant-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="pregnant-no" name="Arepregnant" value="No" checked>
+					</div>
+					<% } %>
+					
+					<div class="col-md-4">
+						<br><br><br><br>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-6">
+						<h4><br>Are you nursing?</h4>
+					</div>
+					<% if(patient[0].all.Arenursing=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="nursing-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="nursing-yes" name="Arenursing" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="nursing-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="nursing-no" name="Arenursing" value="No">
+					</div>
+					<% }else{ %>
+					<div class="col-md-1">
+						<center><label for="nursing-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="nursing-yes" name="Arenursing" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="nursing-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="nursing-no" name="Arenursing" value="No" checked>
+					</div>
+					<% } %>
+					
+					<div class="col-md-4">
+						<br><br><br><br><br>
+					</div>
+				</div>
+				<div class="form-row">
+					<br><br><br><br><br><br><br><br><br><br>
+					<h3 style="color:palevioletred;">Dental History</h3>
+					<hr style="height:1px;border-width:70%;color:gray;background-color:gray">
+				</div>
+
+				<div class="form-row">
+					<div class="col-md-4">
+						<h4>How would you rate your dental health?</h4>
+					</div>
+					<% if(patient[0].all.dentalhealth=="Good"){ %>
+					<div class="col-md-3">
+						<center><label for="dental-good"><h4>Good</h4></label></center>
+						<input type="radio" class="form-control" id="dental-good" name="dentalhealth" value="Good" checked>
+					</div>
+					<div class="col-md-3">
+						<center><label for="dental-fair"><h4>Fair</h4></label></center>
+						<input type="radio" class="form-control" id="dental-fair" name="dentalhealth" value="Fair">
+					</div>
+					<div class="col-md-2">
+						<center><label for="dental-poor"><h4>Poor</h4></label></center>
+						<input type="radio" class="form-control" id="dental-poor" name="dentalhealth" value="Poor">
+					</div>
+					<% } %>
+					<% if(patient[0].all.dentalhealth=="Fair"){ %>
+					<div class="col-md-3">
+						<center><label for="dental-good"><h4>Good</h4></label></center>
+						<input type="radio" class="form-control" id="dental-good" name="dentalhealth" value="Good">
+					</div>
+					<div class="col-md-3">
+						<center><label for="dental-fair"><h4>Fair</h4></label></center>
+						<input type="radio" class="form-control" id="dental-fair" name="dentalhealth" value="Fair" checked>
+					</div>
+					<div class="col-md-2">
+						<center><label for="dental-poor"><h4>Poor</h4></label></center>
+						<input type="radio" class="form-control" id="dental-poor" name="dentalhealth" value="Poor">
+					</div>
+					<% } %>
+					<% if(patient[0].all.dentalhealth=="Poor"){ %>
+					<div class="col-md-3">
+						<center><label for="dental-good"><h4>Good</h4></label></center>
+						<input type="radio" class="form-control" id="dental-good" name="dentalhealth" value="Good">
+					</div>
+					<div class="col-md-3">
+						<center><label for="dental-fair"><h4>Fair</h4></label></center>
+						<input type="radio" class="form-control" id="dental-fair" name="dentalhealth" value="Fair">
+					</div>
+					<div class="col-md-2">
+						<center><label for="dental-poor"><h4>Poor</h4></label></center>
+						<input type="radio" class="form-control" id="dental-poor" name="dentalhealth" value="Poor" checked>
+					</div>
+					<% } %>
+					
+				</div>
+				<div class="form-row">
+					<div class="col-md-6">
+						<h4><br>Do you require antibiotics before dental treatment?</h4>
+					</div>
+					<% if(patient[0].all.antibiotics=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="antibiotics-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="antibiotics-yes" name="antibiotics" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="antibiotics-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="antibiotics-no" name="antibiotics" value="No">
+					</div>
+					<% } else{ %>
+					<div class="col-md-1">
+						<center><label for="antibiotics-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="antibiotics-yes" name="antibiotics" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="antibiotics-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="antibiotics-no" name="antibiotics" value="No" checked>
+					</div>
+					<% } %>
+									
+					<div class="col-md-6">
+						<h4><br>Are you in pain?</h4>
+					</div>
+					<% if(patient[0].all.pain=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="pain-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="pain-yes" name="pain" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="pain-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="pain-no" name="pain" value="No">
+					</div>
+					<% } else{ %>
+					<div class="col-md-1">
+						<center><label for="pain-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="pain-yes" name="pain" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="pain-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="pain-no" name="pain" value="No" checked>
+					</div>
+					<% } %>
+					
+					<div class="col-md-6">
+						<h4><br>Are your teeth sensitive to hot, cold, or anything else?</h4>
+					</div>
+					<% if(patient[0].all.sensitivity=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="sensitive-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="sensitive-yes" name="sensitivity" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="sensitive-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="sensitive-no" name="sensitivity" value="No">
+					</div>
+					<% } else{ %>
+					<div class="col-md-1">
+						<center><label for="sensitive-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="sensitive-yes" name="sensitivity" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="sensitive-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="sensitive-no" name="sensitivity" value="No" checked>
+					</div>
+					<% } %>
+					
+					<div class="col-md-6">
+						<h4><br>Have you ever had any gum treatment?</h4>
+					</div>
+					<% if(patient[0].all.gumtreatment=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="gum-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="gum-yes" name="gumtreatment" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="gum-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="gum-no" name="gumtreatment" value="No">
+					</div>
+					<% } else{ %>
+					<div class="col-md-1">
+						<center><label for="gum-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="gum-yes" name="gumtreatment" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="gum-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="gum-no" name="gumtreatment" value="No" checked>
+					</div>
+					<% } %>
+					
+					<div class="col-md-6">
+						<h4><br>Do your gums bleed?</h4>
+					</div>
+					<% if(patient[0].all.gumbleed=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="gumbleed-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="gumbleed-yes" name="gumbleed" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="gumbleed-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="gumbleed-no" name="gumbleed" value="No">
+					</div>
+					<% } else{ %>
+					<div class="col-md-1">
+						<center><label for="gumbleed-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="gumbleed-yes" name="gumbleed" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="gumbleed-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="gumbleed-no" name="gumbleed" value="No" checked>
+					</div>
+					<% } %>
+					
+					<div class="col-md-6">
+						<h4><br>Do you like your smile?</h4>
+					</div>
+					<% if(patient[0].all.smilelike=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="smile-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="smile-yes" name="smilelike" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="smile-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="smile-no" name="smilelike" value="No">
+					</div>
+					<% } else{ %>
+					<div class="col-md-1">
+						<center><label for="smile-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="smile-yes" name="smilelike" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="smile-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="smile-no" name="smilelike" value="No" checked>
+					</div>
+					<% } %>
+					
+					<div class="col-md-6">
+						<h4><br>Is there anything you would like to change about your smile?</h4>
+					</div>
+					<% if(patient[0].all.changesmile=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="change-smile-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="change-smile-yes" name="changesmile" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="change-smile-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="change-smile-no" name="changesmile" value="No">
+					</div>
+					<% } else{ %>
+					<div class="col-md-1">
+						<center><label for="change-smile-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="change-smile-yes" name="changesmile" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="change-smile-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="change-smile-no" name="changesmile" value="No" checked>
+					</div>
+					<% } %>
+					
+					<div class="col-md-6">
+						<h4><br>Are you happy with the color of your teeth?</h4>
+					</div>
+					<% if(patient[0].all.teethcolor=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="teeth-color-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="teeth-color-yes" name="teethcolor" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="teeth-color-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="teeth-color-no" name="teethcolor" value="No">
+					</div>
+					<% } else{ %>
+					<div class="col-md-1">
+						<center><label for="teeth-color-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="teeth-color-yes" name="teethcolor" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="teeth-color-no"><h4>No</h4></label></center>
+						<input type="radio" class="form-control" id="teeth-color-no" name="teethcolor" value="No" checked>
+					</div>
+					<% } %>
+					
+					<div class="col-md-6">
+						<h4><br>Have you ever had a serious problem with any previous dental work?</h4>
+					</div>
+					<% if(patient[0].all.dentalproblem=="Yes"){ %>
+					<div class="col-md-1">
+						<center><label for="dental-problem-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="dental-problem-yes" name="dentalproblem" value="Yes" checked>
+					</div>
+					<div class="col-md-1">
+						<center><label for="dental-problem-no"><h4>No</h4></label></center>
+					<input type="radio" class="form-control" id="dental-problem-no" name="dentalproblem" value="No">
+					</div>
+					<% } else{ %>
+					<div class="col-md-1">
+						<center><label for="dental-problem-yes"><h4>Yes</h4></label></center>
+						<input type="radio" class="form-control" id="dental-problem-yes" name="dentalproblem" value="Yes">
+					</div>
+					<div class="col-md-1">
+						<center><label for="dental-problem-no"><h4>No</h4></label></center>
+					<input type="radio" class="form-control" id="dental-problem-no" name="dentalproblem" value="No" checked>
+					</div>
+					<% } %>
+					
+				</div>
+				<div class="form-row">
+					<div class="col-md-5">
+						<h4><br><br>When was your last dental visit?</h4>
+					</div>
+					<div class="col-md-4">
+						<br><br><input type="text" class="form-control" name="dentallastvisit" value="<%= patient[0].all.dentallastvisit%>" required>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-6">
+						<h4><hr></h4>
+					</div>
+					<div class="col-md-4">
+						<h4>How many times a day do you brush?</h4>
+					</div>
+					<div class="col-md-3">
+						<select class="form-control" name="brushtimes" value="<%= patient[0].all.brushtimes%>" required>
+						  <option value="1">1</option>
+						  <option value="2">2</option>
+						  <option value="3">3</option>
+						  <option value="4">4</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-6">
+						<h4><hr></h4>
+					</div>
+					<div class="col-md-4">
+						<h4>How many times a week do you floss?</h4>
+					</div>
+					<div class="col-md-3">
+						<select class="form-control" name="flosstimes" value="<%= patient[0].all.flosstimes%>" required>
+						  <option value="0">0</option>
+						  <option value="1">1</option>
+						  <option value="2">2</option>
+						  <option value="3">3</option>
+						  <option value="4">4</option>
+						</select>
+					</div>	
+				</div>
+				<div class="form-row">
+					<div class="col-md-12">
+						<h4><br><br>How can we accommodate you better during your dental visit?</h4>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-8">
+		 	<textarea class="form-control rounded-0" name="accomodation"  rows="4" required><%= patient[0].all.accomodation%></textarea>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-12">
+						<h4><br>Please tick any services below that you would like to discuss during your visit:</h4>
+					</div>
+				</div>
+				<div class="form-row">
+					<% if(patient[0].all.services.includes("Brides")){ %>
+					<div class="col-md-3">
+						<input type="checkbox"  name="services[]" value="Bridges" checked>
+						<label><h4>Bridges</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox"  name="services[]" value="Bridges">
+						<label><h4>Bridges</h4></label>
+					</div>
+					<% } %>
+					
+					<% if(patient[0].all.services.includes("Composite Bonding")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Composite Bonding" checked>
+						<label><h4>Composite Bonding</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Composite Bonding">
+						<label><h4>Composite Bonding</h4></label>
+					</div>
+					<% } %>
+					
+					<% if(patient[0].all.services.includes("Crowns")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Crowns" checked>
+						<label><h4>Crowns</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Crowns">
+						<label><h4>Crowns</h4></label>
+					</div>
+					<% } %>
+					
+					<% if(patient[0].all.services.includes("Night Guards")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Night Guards" checked>
+						<label><h4>Night Guards</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Night Guards">
+						<label><h4>Night Guards</h4></label>
+					</div>
+					<% } %>
+					
+					<% if(patient[0].all.services.includes("Sealants")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Sealants" checked>
+						<label><h4>Sealants</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Sealants">
+						<label><h4>Sealants</h4></label>
+					</div>
+					<% } %>
+					
+					<% if(patient[0].all.services.includes("Partials/Dentures")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Partials/Dentures" checked>
+						<label><h4>Partials/Dentures</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Partials/Dentures">
+						<label><h4>Partials/Dentures</h4></label>
+					</div>
+					<% } %>
+					
+					<% if(patient[0].all.services.includes("Veneers")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Veneers" checked>
+						<label><h4>Veneers</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Veneers">
+						<label><h4>Veneers</h4></label>
+					</div>
+					<% } %>
+					
+					<% if(patient[0].all.services.includes("Whitening")){ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Whitening" checked>
+						<label><h4>Whitening</h4></label>
+					</div>
+					<% }else{ %>
+					<div class="col-md-3">
+						<input type="checkbox" name="services[]" value="Whitening">
+						<label><h4>Whitening</h4></label>
+					</div>
+					<% } %>
+					
+					
+				</div>
+
+				<div class="form-row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<br><br>
+							<center><button class="btn btn-primary">Submit!</button></center>
+							<br><br>
+						</div>
+					</div>
+				</div>
+				
+				
+			</form>
+			
+	
+	
+</div>
+
+ 
+<%- include("../partials/footer") %>

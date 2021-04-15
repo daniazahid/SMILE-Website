@@ -1,0 +1,571 @@
+<%- include("../partials/header") %>
+
+<div class="container" style="background-image: url('https://i.ibb.co/W6kgvcd/IMG-7614.jpg'); background-size: cover;background-position: bottom;height: 250px;">
+	<div class="row">
+		<h1 style="text-align : center;">Search Patient Report</h1>
+		<div style="width: 30% ; margin: 25px auto;">
+			<form action="/campgrounds/patientreport" method="POST">
+				<div class="form-group">
+					<input class="form-control" type="text" name="patientid" list="patientid" placeholder="Patient ID">
+					<datalist id="patientid">
+						<option value="Patient ID" disabled selected>
+						 <% foundUsers.forEach(function(foundPatient){ %>
+							<% if(foundPatient.patientid=="null"){ %>
+					
+							<% }else{ %>
+							<option value="<%= foundPatient.patientid%>">
+						<%	} %>
+							<% }); %>
+					</datalist>
+				</div>
+				<div>
+					<button class="btn btn-lg btn-primary btn-block"><i class="fas fa-search"></i>  Search</button>	
+				</div>
+				
+			</form>
+			<a href="/campgrounds">Back</a>
+		</div>
+		
+	</div>
+	
+</div>
+
+
+<% if(isReport && isRecord){ %>
+      
+<div class="container">
+	<div class="row">
+	<div>
+		<h3 style="color:#2d4469; font-size: 30px">Patient Record</h3>
+		<hr style="height:1px;border-width:70%;color:gray;background-color:gray">
+	</div>
+	</div>	
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h4><strong>Name :</strong> <%= report[0].all.firstname + " " +  report[0].all.lastname   %> </h4> 
+			
+		</div>
+
+		<div class="col-md-6">
+			<h4><strong>Patient ID : </strong><%= report[0].author.patientid %></h4>
+		</div>
+	</div>
+	
+	<div class="row">
+	    <div class="col-md-6">
+			<h4><strong>Address : </strong><%= report[0].all.address1 %></h4>
+      	</div>
+	   <div class="col-md-6">
+		   <h4><strong>Address 2 : </strong><%= report[0].all.address2 %></h4>
+		</div>
+ 	</div>	
+	
+	<div class="row">
+		<div class="col-md-6">
+			<h4><strong>City : </strong><%= report[0].all.city %></h4>
+      	</div>
+		<div class="col-md-4">
+			<h4><strong>State : </strong><%= report[0].all.state %></h4>
+      	</div>
+		<div class="col-md-2">
+			<h4><strong>Zip : </strong><%= report[0].all.zip %></h4>
+      	</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-6">
+			<h4><strong>Email : </strong><%= report[0].all.email %></h4>
+      	</div>
+		<div class="col-md-6">
+			<h4><strong>Gender : </strong><%= report[0].all.gender %></h4>
+      	</div>
+		
+	</div>
+	
+	<div class="row">
+		<div class="col-md-4">
+			<h4><strong>Contact 1 (home) : </strong><%= report[0].all.home %></h4>
+      	</div>
+		<div class="col-md-4">
+			<h4><strong>Contact 2 (work): </strong><%= report[0].all.work %></h4>
+      	</div>
+		<div class="col-md-4">
+			<h4><strong>Cell Phone : </strong><%= report[0].all.cell %></h4>
+      	</div>
+	</div>	
+</div>
+<div class="container">
+	<div class="row">
+		<div>
+			<h3 style="color:#2d4469; font-size: 30px">Medical Patient Record</h3>
+			<hr style="height:1px;border-width:70%;color:gray;background-color:gray">
+		</div>
+	</div>
+	<div class="row" >
+		<div class="col-md-4">
+			<h4><strong>Do you have a physician?</strong></h4>
+		</div>
+		<div class="col-md-6">
+			<h4><strong>Physician's Name : </strong><%= " " + report[0].all.physicianName %> </h4>
+			<h4><strong>Physician's Phone : </strong><%= " " + report[0].all.physicianPhone %></h4>
+			<h4><strong>Date of Last Visit/Exam : </strong><%= " " + report[0].all.physicianLastvisit %></h4>
+		</div>
+					
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<h4><strong>How would you rate your health?</strong></h4>
+		</div>
+		<% if(report[0].all.health=='Good'){ %>
+		<div class="col-md-3">
+			<center><h4 style="color: #2d4469;"><strong>Good</strong></h4></center>		
+		</div>
+		<% }else { %>
+		<div class="col-md-3">
+			<center><h4 >Good</h4></center>		
+		</div>
+		 <% } %>
+		
+		<% if(report[0].all.health=='Fair'){ %>
+		<div class="col-md-3">
+			<center><h4 style="color: #2d4469;"><strong>Fair</strong></h4></center>		
+		</div>
+		<% }else { %>
+		<div class="col-md-3">
+			<center><h4>Fair</h4></center>		
+		</div>
+		 <% } %>
+		<% if(report[0].all.health=='Poor'){ %>
+		<div class="col-md-2">
+			<center><h4 style="color: #2d4469;"><strong>Poor</strong></h4></center>		
+		</div>
+		<% }else { %>
+		<div class="col-md-2">
+			<center><h4>Poor</h4></center>		
+		</div>
+		 <% } %>			
+	</div>
+	<div class="row">
+		<div class="col-md-5">
+			<h4><strong>Do you take any medications?</strong></h4>		
+		</div>
+		<% if(report[0].all.Havemedication=="Yes"){ %>
+		    
+		<div class="col-md-1">
+						<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+		</div>
+		<div class="col-md-5">
+			<textarea class="form-control rounded-0"  rows="4"><%= report[0].all.medication %></textarea>
+		</div>
+		<% }else{ %>
+
+		<div class="col-md-1">
+			<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+		</div>
+		
+		 <% } %>
+					
+    </div>
+	
+	<div class="row">
+		<div class="col-md-5">
+			<h4><strong>Have you ever had surgery or been hospitalized?</strong></h4>		
+		</div>
+		<% if(report[0].all.HaveHospitalized=="Yes"){ %>
+		    
+		<div class="col-md-1">
+						<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+		</div>
+		<div class="col-md-5">
+			<textarea class="form-control rounded-0"  rows="4"><%= report[0].all.hopitalized %></textarea>
+		</div>
+		<% }else{ %>
+		<div class="col-md-1">
+			<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+		</div>
+		
+		 <% } %>
+					
+    </div>
+	
+	<div class="row">
+		<div class="col-md-5">
+			<h4><strong>Do you use any form of tobacco?</strong></h4>		
+		</div>
+		<% if(report[0].all.UseTobacco=="Yes"){ %>
+		    
+		<div class="col-md-1">
+						<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+		</div>
+		<div class="col-md-5">
+			<textarea class="form-control rounded-0"  rows="4"><%= report[0].all.tobacco %></textarea>
+		</div>
+		<% }else{ %>
+		<div class="col-md-1">
+			<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+		</div>
+		
+		 <% } %>
+					
+    </div>
+	
+	<div class="row">
+		<div class="col-md-5">
+			<h4><strong>Do you have any allergies? (medications, food, materials, etc.)</strong></h4>		
+		</div>
+		<% if(report[0].all.HaveAllergies=="Yes"){ %>
+		    
+		<div class="col-md-1">
+						<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+		</div>
+		<div class="col-md-5">
+			<textarea class="form-control rounded-0"  rows="4"><%= report[0].all.allergies %></textarea>
+		</div>
+		<% }else{ %>
+		<div class="col-md-1">
+		<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+		</div>
+		
+		 <% } %>
+					
+    </div>
+	
+	<div class="row">
+					<div class="col-md-12">
+						<h4><strong>Medical conditions : </strong></h4>	
+					</div>
+	</div>
+	<% if(report[0].all.conditions.length>0){ %>
+		<div class="row">
+		<% report[0].all.conditions.forEach(function(condition){ %>
+		
+			<div class="col-md-3">
+				<h4><%= condition %> </h4>		
+			</div>
+			 		
+		<%	}); %>
+		</div>
+	
+		 <% }else { %>
+			<div class="row">
+				<div class="col-md-3">
+					<h4>N/A</h4>		
+				</div>
+			</div>
+	 <% } %>
+	   <% if (report[0].all.gender=='Female') { %>
+				<div class="row">
+					<div class="col-md-5">
+						<h4><strong>Are you taking birth control pills?</strong></h4>
+					</div>
+					<% if(report[0].all.Havebirthcontrol=="Yes"){ %>
+		    
+						<div class="col-md-1">
+							<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+						</div>
+					<% }else{ %>
+						<div class="col-md-1">
+							<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+						</div>
+					 <% } %>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
+						<h4><strong>Are you pregnant?</strong></h4>
+					</div>
+					<% if(report[0].all.Arepregnant=="Yes"){ %>
+		    
+						<div class="col-md-1">
+							<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+						</div>
+			
+					<% }else{ %>
+						
+						<div class="col-md-1">
+							<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+						</div>
+					 <% } %>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
+						<h4><strong>Are you nursing?</strong></h4>
+					</div>
+					<% if(report[0].all.Arenursing=="Yes"){ %>
+		    
+						<div class="col-md-1">
+							<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+						</div>
+						
+					<% }else{ %>
+						
+						<div class="col-md-1">
+							<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+						</div>
+					 <% } %>
+				</div>
+	<% } %>
+	
+</div>
+<div class="container">
+	<div class="row">
+		<div>
+			<h3 style="color:#2d4469; font-size: 30px">Dental Patient Record</h3>
+			<hr style="height:1px;border-width:70%;color:gray;background-color:gray">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<h4><strong>How would you rate your dental health?</strong></h4>
+		</div>
+		<% if(report[0].all.dentalhealth=='Good'){ %>
+		<div class="col-md-3">
+			<center><h4 style="color:#2d4469;"><strong>Good</strong></h4></center>		
+		</div>
+		<% }else { %>
+		<div class="col-md-3">
+			<center><h4 >Good</h4></center>		
+		</div>
+		 <% } %>
+		
+		<% if(report[0].all.dentalhealth=='Fair'){ %>
+		<div class="col-md-3">
+			<center><h4 style="color:#2d4469;"><strong>Fair</strong></h4></center>		
+		</div>
+		<% }else { %>
+		<div class="col-md-3">
+			<center><h4>Fair</h4></center>		
+		</div>
+		 <% } %>
+		<% if(report[0].all.dentalhealth=='Poor'){ %>
+		<div class="col-md-2">
+			<center><h4 style="color:#2d4469;"><strong>Poor</strong></h4></center>		
+		</div>
+		<% }else { %>
+		<div class="col-md-2">
+			<center><h4>Poor</h4></center>		
+		</div>
+		 <% } %>			
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h4><strong>Do you require antibiotics before dental treatment?</strong></h4>
+		</div>
+			<% if(report[0].all.antibiotics=="Yes"){ %>
+		    
+				<div class="col-md-1">
+					<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+				</div>
+				
+			<% }else{ %>
+
+				<div class="col-md-1">
+					<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+				</div>
+			<% } %>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-6">
+			<h4><strong>Are you in pain?</strong></h4>
+		</div>
+			<% if(report[0].all.pain=="Yes"){ %>
+		    
+				<div class="col-md-1">
+					<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+				</div>
+				
+			<% }else{ %>
+				
+				<div class="col-md-1">
+					<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+				</div>
+			<% } %>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h4><strong>Are your teeth sensitive to hot, cold, or anything else?</strong></h4>
+		</div>
+			<% if(report[0].all.sensitivity=="Yes"){ %>
+		    
+				<div class="col-md-1">
+					<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+				</div>
+				
+			<% }else{ %>
+				
+				<div class="col-md-1">
+					<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+				</div>
+			<% } %>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h4><strong>Have you ever had any gum treatment?</strong></h4>
+		</div>
+			<% if(report[0].all.gumtreatment=="Yes"){ %>
+		    
+				<div class="col-md-1">
+					<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+				</div>
+			<% }else{ %>
+				<div class="col-md-1">
+					<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+				</div>
+			<% } %>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h4><strong>Do your gums bleed?</strong></h4>
+		</div>
+			<% if(report[0].all.gumbleed=="Yes"){ %>
+		    
+				<div class="col-md-1">
+					<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+				</div>
+			<% }else{ %>
+				<div class="col-md-1">
+					<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+				</div>
+			<% } %>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h4><strong>Do you like your smile?</strong></h4>
+		</div>
+			<% if(report[0].all.smilelike=="Yes"){ %>
+		    
+				<div class="col-md-1">
+					<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+				</div>
+			<% }else{ %>
+			
+				<div class="col-md-1">
+					<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+				</div>
+			<% } %>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h4><strong>Is there anything you would like to change about your smile?</strong></h4>
+		</div>
+			<% if(report[0].all.changesmile=="Yes"){ %>
+		    
+				<div class="col-md-1">
+					<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+				</div>
+			
+			<% }else{ %>
+				
+				<div class="col-md-1">
+					<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+				</div>
+			<% } %>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h4><strong>Are you happy with the color of your teeth?</strong></h4>
+		</div>
+			<% if(report[0].all.teethcolor=="Yes"){ %>
+		    
+				<div class="col-md-1">
+					<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+				</div>
+			
+			<% }else{ %>
+				
+				<div class="col-md-1">
+					<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+				</div>
+			<% } %>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h4><strong>Have you ever had a serious problem with any previous dental work?</strong></h4>
+		</div>
+			<% if(report[0].all.dentalproblem=="Yes"){ %>
+		    
+				<div class="col-md-1">
+					<center><h4 style="color : #2d4469;"><strong>Yes</strong></h4></center>	
+				</div>
+				
+			<% }else{ %>
+				<div class="col-md-1">
+					<center><h4  style="color : #2d4469;"><strong>No</strong></h4></center>			
+				</div>
+			<% } %>
+	</div>
+	<div class="row">
+		<div class="col-md-5">
+			<h4><strong>When was your last dental visit?</strong></h4>
+		</div>
+		<div class="col-md-7">
+			<h4>
+				<%= report[0].all.dentallastvisit %> 
+			</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-5">
+			<h4><strong>How many times a day do you brush?</strong></h4>
+		</div>
+		<div class="col-md-3">
+			<h4>
+				<%= report[0].all.brushtimes %> 
+			</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-5">
+			<h4><strong>How many times a week do you floss?</strong></h4>
+		</div>
+		<div class="col-md-3">
+			<h4>
+				<%= report[0].all.flosstimes %> 
+			</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h4><strong>How can we accommodate you better during your dental visit?</strong></h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+		 	<textarea class="form-control rounded-0"  rows="4"><%= report[0].all.accomodation %></textarea>
+		</div>
+	</div>
+	<div class="row">
+					<div class="col-md-12">
+						<h4><strong>Services would you like to discuss during your visit : </strong></h4>	
+					</div>
+	</div>
+	<% if(report[0].all.services.length>0){ %>
+		<div class="row">
+		<% report[0].all.services.forEach(function(services){ %>
+		
+			<div class="col-md-3">
+				<h4><%= services %> </h4>		
+			</div>
+			 		
+		<%	}); %>
+		</div>
+	
+		 <% }else { %>
+			<div class="row">
+				<div class="col-md-3">
+					<h4>N/A</h4>		
+				</div>
+			</div>
+	 <% } %>
+	
+</div>
+<br><br><br>
+ <% }else if (isReport==true && isRecord==false) { %>
+<div class="container" style="background: #f2dede;color: #a94442;padding: 15px;margin-top: 20px;border-radius: 4px;border: 1px solid transparent;">
+	Patient record not found. Please try a different Patient ID.
+</div>	
+<%	} %>
+<%- include("../partials/footer") %>

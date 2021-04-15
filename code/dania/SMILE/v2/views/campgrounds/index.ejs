@@ -1,0 +1,170 @@
+<%- include("../partials/header") %>
+<head>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/stylesheets/newmain.css">
+</head>
+<div class="container">
+	<header class="jumbotron">
+		<div>
+			<h1>Relax. Restore. Rejuvenate</h1>
+				<p>	Smile combines the latest advancements in dental technology with a kind, warm, and welcoming atmosphere. You’ll love the spa-like feel of our office, personal one-on-one care, and our commitment to your health and your smile.!</p>
+			<p>
+				<% if (currentUser) { %>
+					<% if(currentUser.isAdmin) { %>
+	  <a class="btn btn-primary btn-lg" href="/campgrounds/new"><i class="fas fa-chevron-circle-up"></i>  Add new Content</a>
+	  <a class="btn btn-primary btn-lg" href="/campgrounds/newAppointment"><i class="far fa-calendar-check"></i>  Make an Appointment</a>
+				<a class="btn btn-primary btn-lg" href="/deleteEverything"><i class="fas fa-user-slash"></i>  Delete Users</a>
+						 <% }; if (currentUser.Employee.isEmployee){ %>
+		<a class="btn btn-primary btn-lg" href="/campgrounds/patientreport"><i class="far fa-file-alt"></i>  Generate Patient Report</a>
+		<a class="btn btn-primary btn-lg" href="/campgrounds/dentistprofileform"><i class="far fa-address-card"></i>  Set up Profile</a>
+			<a class="btn btn-primary btn-lg" href="/campgrounds/leaveApplication"><i class="fas fa-user-clock"></i>  Apply for leave</a>
+<a class="btn btn-primary btn-lg" href="/campgrounds/payroll"><i class="fas fa-file-invoice-dollar"></i>  Check payroll</a>
+
+
+						<%	if(currentUser.Employee.attendanceStart){ %>
+					
+	<a class="btn btn-primary btn-lg" href="/campgrounds/checkedOut"><i class="far fa-check-square"></i>  Checkout</a>
+				        <% }else{ %>
+	<a class="btn btn-primary btn-lg" href="/campgrounds/attendanceMarked"><i class="fas fa-marker"></i>  Mark Attendance</a>
+						<%	} %>
+					<% }; if (currentUser.isForm){ %>
+	<a class="btn btn-primary btn-lg" href="/campgrounds/newAppointment"><i class="far fa-calendar-check"></i>  Make an Appointment</a>
+	<a class="btn btn-warning btn-lg" href="/campgrounds/medicalprofileform/<%= currentUser._id%>/editMedicalProfile"><i class="fas fa-user-edit"></i>  Edit Medical Profile</a>
+			<% }; if(currentUser.isForm==false && currentUser.Employee.isEmployee==false && currentUser.isAdmin==false) { %>					<% console.log("TESTING : " +currentUser.isForm ); %> 
+					<a class="btn btn-primary btn-lg" href="/campgrounds/newAppointment"><i class="far fa-calendar-check"></i>  Make an Appointment</a>
+		<a class="btn btn-primary btn-lg" href="/campgrounds/medicalprofileform"><i class="fas fa-notes-medical"></i>  Set up Medical Profile</a>
+						<%	}; %>
+				<%	} else{ %>
+				 	<a class="btn btn-primary btn-lg" href="/campgrounds/newAppointment"><i class="far fa-calendar-check"></i>  Make an Appointment</a>
+		<a class="btn btn-primary btn-lg" href="/campgrounds/medicalprofileform"><i class="fas fa-notes-medical"></i>  Set up Medical Profile</a>
+				<% } %>
+			
+			</p>
+		</div>
+
+	</header>
+
+	
+	
+	<% var count=campgrounds.length %>
+	
+	<div class="row" style="display:flex; flex-wrap: wrap;">
+		<% campgrounds.forEach(function(campground){ %>
+			<% if(count!=0){ %>
+			<% if(count%2!=0 ){ %>
+			<div class="col-lg-6">    
+				<div class="thumbnail">
+					<img src="<%= campground.image %>">
+				</div>
+			</div>	
+			
+			<div class="col-lg-6">    
+				<div class="thumbnail">
+					<div>
+						<h4 ><span class="captionName"><%= campground.name %></span></h4>
+					</div>
+					<% var str1=campground.description; %>
+					<%if(str1.length > 600){ %>
+						
+					 <% str1 = str1.substring(0,600); %>
+					  
+						 <div class="autoShowHide"><%= str1 %> </div>
+					 
+					<% }else{ %>
+						<div class="autoShowHide"><%= campground.description %> </div>
+					<% } %>
+					<center><p class="captionName">
+						<a href="/campgrounds/<%= campground._id %>" class="btn btn-primary "><i class="fas fa-angle-double-right"></i>  More Info</a>
+					</p></center>
+					
+				</div>
+				
+			</div>
+			<% count=count-1; %>
+			<% } else { %>
+			<div class="col-lg-6">    
+				<div class="thumbnail">
+					<div>
+						<h4 ><span class="captionName"><%= campground.name %></span></h4>
+					</div>
+					<% var str1=campground.description; %>
+					<%if(str1.length > 600){ %>
+						
+					 <% str1 = str1.substring(0,600); %>
+					  
+						 <div class="autoShowHide"><%= str1 %> </div>
+					 
+					<% }else{ %>
+						<div class="autoShowHide"><%= campground.description %> </div>
+					<% } %>
+					<center><p  class="captionName">
+						<a href="/campgrounds/<%= campground._id %>" class="btn btn-primary "><i class="fas fa-angle-double-right"></i>  More Info</a>
+					</p></center>
+					
+				</div>
+				
+			</div>
+			
+			<div class="col-lg-6">    
+				<div class="thumbnail">
+					<img src="<%= campground.image %>">
+				</div>
+			</div>	
+			<% count=count-1; %>
+			<% } %>
+			
+			<% }  %>
+			    
+			
+			
+		<% }); %>
+	</div>
+	
+	<!-- What patients say starts here  -->
+	<div class="row" style="display:flex; flex-wrap: wrap;" >
+		<h2 class="PatientTitle" >
+			What Our Patients Say
+		</h2>
+	</div>
+	
+	<div class="row" style="display:flex; flex-wrap: wrap;">
+		
+		<div class="col-lg-4">
+			<center><img src="https://www.timberhilldental.com/wp-content/uploads/2017/07/lindy-testimonial.jpeg" class="Patient-Avatar" class="responsive" alt=""></center>
+				
+			<p class="Patient-Text1">
+				“When it comes to dental work I have some serious anxiety, so I am always thankful for the calming, spa-like atmosphere of Smile Dental. They use the most modern, state-of-the-art equipment available in dentistry. They offer paraffin wax hand treatments to relax you while you get your teeth cleaned! <strong>Smile Dental is as good as it gets!</strong>“
+			</p>
+			<p class="Patient-Text2">
+			– Lindy O.
+			</p>
+		</div>
+		<div class="col-lg-4">
+			<center>
+				<img src="https://www.timberhilldental.com/wp-content/uploads/2017/07/sydney-testimonial.jpeg" class="Patient-Avatar" class="responsive" alt="">
+			</center>
+			
+			<p class="Patient-Text1">
+				“The Smile staff are excellent. They are incredibly welcoming and everyone was friendly and outgoing. They even spent extra time to explain procedures to me. It was an awesome experience!“
+			</p>
+			<p class="Patient-Text2">
+				– Sydney Laudon
+			</p>
+		</div>
+		<div class="col-lg-4">
+			<center><img src="https://www.timberhilldental.com/wp-content/uploads/2017/07/shasta-testimonial.jpeg" class="Patient-Avatar" class="responsive" alt=""></center>
+			
+			<p class="Patient-Text1">
+						“I can’t say enough about how great my experience was at Smile. There are so many little touches (hot towel when you’re finished, warm paraffin hand treatments during cleanings, etc.) that make Smile stand out. <strong>I really felt like they all genuinely cared about me and my teeth and my experience in their office.</strong>“
+
+				
+			</p>
+			<p class="Patient-Text2">
+				– Shasta Barnes
+			</p>
+		</div>
+	</div>
+</div>
+
+
+<%- include("../partials/footer") %>
